@@ -1,0 +1,7 @@
+C:\Users\tapli\source\repos\T_GestaoContas_AED2020\T_GestaoContas_AED2020\bin\Debug\T_GestaoContas_AED2020.exe.config
+C:\Users\tapli\source\repos\T_GestaoContas_AED2020\T_GestaoContas_AED2020\bin\Debug\T_GestaoContas_AED2020.exe
+C:\Users\tapli\source\repos\T_GestaoContas_AED2020\T_GestaoContas_AED2020\bin\Debug\T_GestaoContas_AED2020.pdb
+C:\Users\tapli\source\repos\T_GestaoContas_AED2020\T_GestaoContas_AED2020\obj\Debug\T_GestaoContas_AED2020.csprojAssemblyReference.cache
+C:\Users\tapli\source\repos\T_GestaoContas_AED2020\T_GestaoContas_AED2020\obj\Debug\T_GestaoContas_AED2020.csproj.CoreCompileInputs.cache
+C:\Users\tapli\source\repos\T_GestaoContas_AED2020\T_GestaoContas_AED2020\obj\Debug\T_GestaoContas_AED2020.exe
+C:\Users\tapli\source\repos\T_GestaoContas_AED2020\T_GestaoContas_AED2020\obj\Debug\T_GestaoContas_AED2020.pdb
