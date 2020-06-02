@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace T_GestaoContas_AED2020
 {
     public enum Gender { Male, Female }
-    class Owner : Account
+    class Owner 
     {
         // ATRIBUTOS 
         private string name;

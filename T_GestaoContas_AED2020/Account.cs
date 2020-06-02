@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace T_GestaoContas_AED2020
 {
@@ -64,18 +61,19 @@ namespace T_GestaoContas_AED2020
             return false;
         }
 
-        //DETALHES DE UMA DETERMINADA CONTA
+        //DETALHES DE UMA DETERMINADA CONTA INVOCADA PELA CLASSE BANCO
         public string AccountDetails()
         {
             Console.WriteLine("\n#############  ACCOUNT DETAILS  #############\n");
             for (int i = 0; i < maxOwners; i++)                                                    // PERCORRE TODOS OS TITULARES DE UMA CONTA
             {
-                if (i >= 0 )
+                if (i >= 0)
                     Console.WriteLine(" > OWNER DATA #" + (i + 1) + "\n" + owners[i].ListOwners()); // IMPRIME OS DADOS DOS TITULARES
                 Console.WriteLine();
             }
-            return string.Format(" NIB: {0}\n Type: {1}\n", Nib, Type );                            // IMPRIME O NIB E O TIPO DE CONTA
+            return string.Format(" NIB: {0}\n Type: {1}\n", Nib, Type);                            // IMPRIME O NIB E O TIPO DE CONTA
         }
+
 
         // IMPRIMIR RESULTADOS
         public override string ToString() 

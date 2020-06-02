@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace T_GestaoContas_AED2020
 {
-    class Bank : Owner
+    class Bank 
     {
         // ATRIBUTOS
         private List<Owner> owners;
@@ -84,6 +82,21 @@ namespace T_GestaoContas_AED2020
             return string.Format("");
         }
 
+        // RETORNA OS DETALHES DE UMA CONTA ESPECIFICA
+        public string AccountDetails(long nib)
+        {
+            for (int i = 0; i < accounts.Count; i++)        // PERCORRE LISTA DE CONTAS
+            {
+                if (accounts[i].Nib.Equals(nib))            // ENCONTRA O NIB
+                    if (accounts[i].Owners.Length != 0)     // TEM TITULAR VALIDO
+                    {
+                        accounts[i].AccountDetails();       // IMPRIME RESULTADOS DOS TITULARES
+                        Console.WriteLine(" Balance: {0} euros\n NIB: {1} \n Type: {2}\n", accounts[i].Balance, accounts[i].Nib, accounts[i].Type);
+                    }
+            }
+            return string.Format("");
+        }
+
         // TRANFERENCIAS ENTRE CONTAS 
         public void TransferBetweenAccounts(long nib1, long nib2, double amount)
         {
@@ -112,18 +125,6 @@ namespace T_GestaoContas_AED2020
             }
         }
 
-        ////public override string ToString()
-        ////{
-        ////    StringBuilder res = new StringBuilder();
-        ////    foreach (var account in accounts)
-        ////    {
-        ////        res.Append(account);
-        ////    }
-        ////    return res.ToString();
-        ////}
-
-
-        // PAGAMENTOS AUTOMATICOS
 
     } // END CLASS
 } 

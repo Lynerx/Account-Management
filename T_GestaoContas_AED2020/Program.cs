@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace T_GestaoContas_AED2020
 {
@@ -35,41 +30,47 @@ namespace T_GestaoContas_AED2020
             Account account04 = new Account { Nib = 003600000000000000004, Type = Type.Order,  Owners = new Owner[] { diogoZe, telmaMont} };
 
                 // ADICIONAR AS CONTAS NO BANCO  
-            bank.OpenNewAccount(account01.Nib, 6821.36, account01.Owners);
+            bank.OpenNewAccount(account01.Nib, 16821.36, account01.Owners);
             bank.OpenNewAccount(account02.Nib, -4822.21, account02.Owners);
             bank.OpenNewAccount(account03.Nib, 981.48, account03.Owners);
             bank.OpenNewAccount(account04.Nib, -5004.32, account04.Owners);
 
-                // LISTAR TODAS AS CONTAS DO BANCO
-            //bank.ListAllAccounts();
 
-                // DETALHES DA UMA CONTA ESPECIFICA (NAO MOSTRA O SALDO )
-            //Console.WriteLine(account01.AccountDetails());
-            //Console.WriteLine(account02.AccountDetails());
-            //Console.WriteLine(account03.AccountDetails()); //  Unhandled Exception: System.IndexOutOfRangeException: Index was outside the bounds of the array.
-            //Console.WriteLine(account04.AccountDetails()); //  Unhandled Exception: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+            // LISTAR TODAS AS CONTAS DO BANCO
+            bank.ListAllAccounts();
 
-                // LISTAR TODAS AS CONTAS COM SALDO NEGATIVO
-            //bank.NegativeBalanceAccounts();
+            Console.WriteLine("..........................................................");
 
-                // TRANSFERENCIA ENTRE CONTAS (NIB1, NIB2, QUANTIA) 
-            //bank.TransferBetweenAccounts(account01.Nib, account02.Nib, 4822.21);
+            // DETALHES DA UMA CONTA ESPECIFICA
+            bank.AccountDetails(account01.Nib);
+            bank.AccountDetails(account02.Nib);
 
-            //Console.WriteLine("..........................................................");
-            //    // INSTANCIAR COMPANHIA QUE TEM ENTIDADE E REFERENCIA
-            //Company companyNOS = new Company();
-            //long entity = companyNOS.GenerateEntity();
-            //long reference = companyNOS.GenerateReference();
-            //Console.WriteLine("Company balance: "+ companyNOS.CompanyBalance + " euros.");
-            //Console.WriteLine("Entity: " + entity);
-            //Console.WriteLine("Referece: " + reference);
-            //    // FAZER UM PAGAMENTO DE SERVIÇOS 
-            //bank.ServicePayments(account01.Nib, entity, reference, 3000, companyNOS);
-            //Console.WriteLine("Company balance: "+ companyNOS.CompanyBalance + " euros.");
-            //Console.WriteLine("..........................................................");
+            Console.WriteLine("..........................................................");
 
+            // LISTAR TODAS AS CONTAS COM SALDO NEGATIVO
+            bank.NegativeBalanceAccounts();
 
+            Console.WriteLine("..........................................................");
 
+            // TRANSFERENCIA ENTRE CONTAS (NIB1, NIB2, QUANTIA) 
+            bank.TransferBetweenAccounts(account01.Nib, account02.Nib, 4822.21);
+            bank.AccountDetails(account01.Nib);
+            bank.AccountDetails(account02.Nib);
+
+            Console.WriteLine("..........................................................");
+            // INSTANCIAR COMPANHIA QUE TEM ENTIDADE E REFERENCIA
+            Company companyNOS = new Company();
+            long entity = companyNOS.GenerateEntity();
+            long reference = companyNOS.GenerateReference();
+            Console.WriteLine("Company balance: " + companyNOS.CompanyBalance + " euros.");
+            Console.WriteLine("Entity: " + entity);
+            Console.WriteLine("Referece: " + reference);
+            // FAZER UM PAGAMENTO DE SERVIÇOS 
+            bank.ServicePayments(account01.Nib, entity, reference, 3000, companyNOS);
+            Console.WriteLine("Company balance: " + companyNOS.CompanyBalance + " euros.");
+            Console.WriteLine("..........................................................");
+
+           
 
 
         } // END PROGRAM

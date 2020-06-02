@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace T_GestaoContas_AED2020
 {
@@ -17,7 +14,6 @@ namespace T_GestaoContas_AED2020
         private long minRef = 99999999;
         private long maxRef = 999999999;
         private double companyBalance;
-
 
         // GETTERS & SETTERS
         public long Entity { get => entity; set => entity = value; }
