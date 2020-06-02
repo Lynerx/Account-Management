@@ -10,12 +10,13 @@ namespace T_GestaoContas_AED2020
         private List<Owner> owners;
         private List<Account> accounts;
         private Company company;
+        private string name;
 
         public Bank()
         {
             owners = new List<Owner>();
             accounts = new List<Account>();
-            company = new Company();
+            company = new Company(name);
         }
 
         // ABRIR UMA NOVA CONTA NO BANCO
@@ -113,14 +114,13 @@ namespace T_GestaoContas_AED2020
         }
 
         // PAGAMENTOS DE SERVIÇO
-        public void ServicePayments(long nib, long entity, long reference, double amount, Company company)
+        public void ServicePayments(long nib, long entity, long reference, double amount)
         {
             for (int i = 0; i < accounts.Count; i++)
             {
                 if (accounts[i].Nib.Equals(nib) && accounts[i].Owners.Length != 0)
                 {
                     accounts[i].Balance -= amount;
-                    company.CompanyBalance += amount;
                 }
             }
         }

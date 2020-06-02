@@ -67,11 +67,11 @@ namespace T_GestaoContas_AED2020
             Console.WriteLine("\n#############  ACCOUNT DETAILS  #############\n");
             for (int i = 0; i < maxOwners; i++)                                                    // PERCORRE TODOS OS TITULARES DE UMA CONTA
             {
-                if (i >= 0)
+                if (i >= 0 && owners[i] != null)
                     Console.WriteLine(" > OWNER DATA #" + (i + 1) + "\n" + owners[i].ListOwners()); // IMPRIME OS DADOS DOS TITULARES
                 Console.WriteLine();
             }
-            return string.Format(" NIB: {0}\n Type: {1}\n", Nib, Type);                            // IMPRIME O NIB E O TIPO DE CONTA
+            return string.Format("");                           
         }
 
 

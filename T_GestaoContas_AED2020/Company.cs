@@ -7,18 +7,23 @@ namespace T_GestaoContas_AED2020
     class Company
     {
         // ATRIBUTOS
+        private string name;
         private long entity;
         private long reference;
         private long minEnt = 9999;
         private long maxEnt = 99999;
         private long minRef = 99999999;
         private long maxRef = 999999999;
-        private double companyBalance;
 
         // GETTERS & SETTERS
         public long Entity { get => entity; set => entity = value; }
         public long Reference { get => reference; set => reference = value; }
-        public double CompanyBalance { get => companyBalance; set => companyBalance = value; }
+        public string Name { get => name; set => name = value; }
+
+        public Company(string name)
+        {
+            this.name = name;
+        }
 
         // GERAR UM NUMERO RANDOM COM 5 DIGITOS 
         public long GenerateEntity()
