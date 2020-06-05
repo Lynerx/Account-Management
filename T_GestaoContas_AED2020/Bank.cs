@@ -9,12 +9,13 @@ namespace T_GestaoContas_AED2020
         // ATRIBUTOS
         private List<Owner> owners;
         private List<Account> accounts;
+        private Stack<Owner> stackOwners;
 
         public Bank()
         {
             owners = new List<Owner>();
             accounts = new List<Account>();
-            //company = new Company(name);
+            stackOwners = new Stack<Owner>();
         }
 
         // ABRIR UMA NOVA CONTA NO BANCO
@@ -25,10 +26,12 @@ namespace T_GestaoContas_AED2020
             {                                                               // CASO NAO EXISTA NENHUM TITULAR
                 if (!this.owners.Contains(owner)) this.owners.Add(owner);   // ADICIONA ESSE TITULAR
                 account.AddOwner(owner);
+                stackOwners.Push(owner);
             }                                                               // UPDATE DE DADOS
             account.Balance = inicialBalance;
             account.Nib = nib;
-            this.accounts.Add(account);
+            accounts.Add(account);
+
             return false;
         }
 
@@ -123,6 +126,15 @@ namespace T_GestaoContas_AED2020
             }
         }
 
+        public String GetOwnersInfoInStack()
+        {
+            foreach (var item in stackOwners)
+            {
+                Console.WriteLine(item.ListOwners().ToUpper() + "\n");
+            }
+            return string.Format("");
+
+        }
 
     } // END CLASS
 } 

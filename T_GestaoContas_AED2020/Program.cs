@@ -8,7 +8,7 @@ namespace T_GestaoContas_AED2020
         static void Main(string[] args)
         {
             Console.WriteLine("\n ==============  BANK  ============== ");
-            
+
                 // INSTANCIAR O BANCO
             Bank bank = new Bank();
 
@@ -24,7 +24,8 @@ namespace T_GestaoContas_AED2020
             Owner telmaMont = new Owner { Name = "Telma Monteiro", Nif = 889741506, BirthDate = new DateTime(2000, 08, 18), Gender = Gender.Female };
             Owner tiagoRodr = new Owner { Name = "Tiago Rodrigues", Nif = 012458497, BirthDate = new DateTime(1990, 11, 13), Gender = Gender.Male };
 
-                // INSTANCIAR INFORMAÇÕES DE NOVAS CONTAS
+
+            // INSTANCIAR INFORMAÇÕES DE NOVAS CONTAS
             Account account01 = new Account { Nib = 0036001, Type = Type.Order,  Owners = new Owner[] { tiagoLino, vascoQuelhas, nelsonRodr } };
             Account account02 = new Account { Nib = 0036002, Type = Type.LongTerm,  Owners = new Owner[] { marioSilva, andrePinto, mariaPonte } };
             Account account03 = new Account { Nib = 0036003, Type = Type.Saving,  Owners = new Owner[] { pedroSilv} };
@@ -35,22 +36,26 @@ namespace T_GestaoContas_AED2020
             bank.OpenNewAccount(account02.Nib, -4822.21, account02.Owners);
             bank.OpenNewAccount(account03.Nib, 981.48, account03.Owners);
             bank.OpenNewAccount(account04.Nib, -5004.32, account04.Owners);
-           
+
                 // QUEUE DAS ULTIMAS TRANSAÇÕES 
             Queue<string> lastTransactions = new Queue<string>(50);
-            
+
+
             bool flag = true;
 
             while (flag)
             {
                 Console.WriteLine(" > Escolha uma opção: ".ToUpper());
-                Console.WriteLine(" 1 - Listar todas as contas do Banco".ToUpper());
-                Console.WriteLine(" 2 - Detalhes de uma conta espefícica".ToUpper());
-                Console.WriteLine(" 3 - Listar todas as contas com saldo negativo".ToUpper());
-                Console.WriteLine(" 4 - Transferência entre contas".ToUpper());
-                Console.WriteLine(" 5 - Pagamento de serviços".ToUpper());
-                Console.WriteLine(" 6 - Ultimas transações".ToUpper());
-                Console.WriteLine(" 7 - Sair".ToUpper());
+                Console.WriteLine(" 1 - Depositar".ToUpper());
+                Console.WriteLine(" 2 - Levantar".ToUpper());
+                Console.WriteLine(" 3 - Listar todas as contas do Banco".ToUpper());
+                Console.WriteLine(" 4 - Detalhes de uma conta espefícica".ToUpper());
+                Console.WriteLine(" 5 - Listar todas as contas com saldo negativo".ToUpper());
+                Console.WriteLine(" 6 - Transferência entre contas".ToUpper());
+                Console.WriteLine(" 7 - Pagamento de serviços".ToUpper());
+                Console.WriteLine(" 8 - Ultimas transações".ToUpper());
+                Console.WriteLine(" 9 - Listar todas as informações dos titulares".ToUpper());
+                Console.WriteLine(" 10 - Sair".ToUpper());
                 Console.Write(" -> ");
 
                 int menu = int.Parse(Console.ReadLine());
@@ -58,12 +63,35 @@ namespace T_GestaoContas_AED2020
                 switch (menu)
                 {
                     case 1:
+                        Console.Write("\n>> Introduza NIB da conta a depositar: ".ToUpper());
+                        long nibDeposit = long.Parse(Console.ReadLine());
+                        Console.Write(">> Montante a depositar: ".ToUpper()); double depositAmount = long.Parse(Console.ReadLine());
+                        bank.Deposit(nibDeposit, depositAmount);
+
+                        lastTransactions.Enqueue(">> Deposito | Montante: ".ToUpper() + depositAmount);
+                        Console.WriteLine(" (Depostito com sucesso)".ToUpper());
+                        Console.WriteLine();
+                        break;
+
+                    case 2:
+                        Console.Write("\n>> Introduza NIB da conta a levantar: ".ToUpper());
+                        long nibWithdraw = long.Parse(Console.ReadLine());
+                        Console.Write(">> Montante a levantar: ".ToUpper()); double withdrawAmount = long.Parse(Console.ReadLine());
+                        bank.Withdraw(nibWithdraw, withdrawAmount);
+
+                        lastTransactions.Enqueue(">> Levantamento | Montante: ".ToUpper() + withdrawAmount);
+
+                        Console.WriteLine(" (Levantamento com sucesso)".ToUpper());
+                        Console.WriteLine();
+                        break;
+
+                    case 3:
                         // LISTAR TODAS AS CONTAS DO BANCO
                         bank.ListAllAccounts();
                         Console.WriteLine("..........................................................\n");
                         break;
 
-                    case 2:
+                    case 4:
                         // DETALHES DA UMA CONTA ESPECIFICA
                         Console.Write(">> Introduza o NIB: ".ToUpper());
                         long nibInput = long.Parse(Console.ReadLine());
@@ -71,12 +99,13 @@ namespace T_GestaoContas_AED2020
                         Console.WriteLine("..........................................................\n");
                         break;
 
-                    case 3:
+                    case 5:
                         // LISTAR TODAS AS CONTAS COM SALDO NEGATIVO
                         bank.NegativeBalanceAccounts();
                         Console.WriteLine("..........................................................\n");
                         break;
-                    case 4:
+
+                    case 6:
                         // TRANSFERENCIA ENTRE CONTAS (NIB1, NIB2, QUANTIA) 
                         Console.Write("\n>> Introduza NIB conta origem: ".ToUpper());
                         long nibInputOrigem = long.Parse(Console.ReadLine());
@@ -85,14 +114,14 @@ namespace T_GestaoContas_AED2020
                         Console.Write(">> Introduza montante: ".ToUpper());
                         long montante = long.Parse(Console.ReadLine());
                         bank.TransferBetweenAccounts(nibInputOrigem, nibInputDestino, montante);
-                        // ADICIONAR A STACK
 
+                        // ADICIONAR A QUEUE
                         lastTransactions.Enqueue((">> NIB Origem: " + nibInputOrigem + " | NIB Destino: " + nibInputDestino + " | Montante: " + montante).ToUpper());
-
+                        Console.WriteLine(" (Transfência com sucesso)".ToUpper());
                         Console.WriteLine("..........................................................\n");
                         break;
 
-                    case 5:
+                    case 7:
                         // INSTANCIAR COMPANHIA QUE TEM ENTIDADE E REFERENCIA
                         Company companyNOS = new Company("NOS");
                         long entity = companyNOS.GenerateEntity();
@@ -110,7 +139,7 @@ namespace T_GestaoContas_AED2020
 
                         Console.WriteLine(" [ Pagar a ".ToUpper() + companyVodafone.Name + " ]");
                         Console.WriteLine(">> Entidade: ".ToUpper() + entity1);
-                        Console.WriteLine(">> Referência: .ToUpper()" + reference1);
+                        Console.WriteLine(">> Referência: ".ToUpper() + reference1);
                         Console.WriteLine();
 
                         Console.Write(">> Introduza NIB: ".ToUpper()); long nib2 = long.Parse(Console.ReadLine());
@@ -121,18 +150,25 @@ namespace T_GestaoContas_AED2020
                         bank.ServicePayments(nib2, ent, refe, mont);
 
                         lastTransactions.Enqueue(">> Pagamento de serviços | Montante: ".ToUpper() + mont);
-
+                        Console.WriteLine(" (Pagamento de serviço com sucesso)".ToUpper());
                         Console.WriteLine("..........................................................\n");
                         break;
 
-                    case 6:
+                    case 8:
                         // IMPRIMIR QUEUE DAS ULTIMAS TRANSAÇÕES
-                        Console.WriteLine("\nUltimas transações: \n".ToUpper());
+                        Console.WriteLine("\n [ Ultimas transações ]  [ QUEUE ] \n".ToUpper());
                         foreach (var item in lastTransactions) { Console.WriteLine(item); }
                         Console.WriteLine();
+                        Console.WriteLine("..........................................................\n");
                         break;
 
-                    case 7:
+                    case 9:
+                        Console.WriteLine("\n [ Informação dos titulares ] [ STACK ]".ToUpper());
+                        bank.GetOwnersInfoInStack();
+                        Console.WriteLine("..........................................................\n");
+                        break;
+
+                    case 10:
                         flag = false;
                         break;
 
