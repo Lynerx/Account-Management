@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace T_GestaoContas_AED2020
 {
@@ -34,18 +35,22 @@ namespace T_GestaoContas_AED2020
             bank.OpenNewAccount(account02.Nib, -4822.21, account02.Owners);
             bank.OpenNewAccount(account03.Nib, 981.48, account03.Owners);
             bank.OpenNewAccount(account04.Nib, -5004.32, account04.Owners);
-
+           
+                // QUEUE DAS ULTIMAS TRANSAÇÕES 
+            Queue<string> lastTransactions = new Queue<string>(50);
+            
             bool flag = true;
 
             while (flag)
             {
-                Console.WriteLine(" > Escolha uma opção: ");
-                Console.WriteLine(" 1 - Listar todas as contas do Banco");
-                Console.WriteLine(" 2 - Detalhes de uma conta espefícica");
-                Console.WriteLine(" 3 - Listar todas as contas com saldo negativo");
-                Console.WriteLine(" 4 - Transferência entre contas");
-                Console.WriteLine(" 5 - Pagamento de serviços");
-                Console.WriteLine(" 6 - Sair");
+                Console.WriteLine(" > Escolha uma opção: ".ToUpper());
+                Console.WriteLine(" 1 - Listar todas as contas do Banco".ToUpper());
+                Console.WriteLine(" 2 - Detalhes de uma conta espefícica".ToUpper());
+                Console.WriteLine(" 3 - Listar todas as contas com saldo negativo".ToUpper());
+                Console.WriteLine(" 4 - Transferência entre contas".ToUpper());
+                Console.WriteLine(" 5 - Pagamento de serviços".ToUpper());
+                Console.WriteLine(" 6 - Ultimas transações".ToUpper());
+                Console.WriteLine(" 7 - Sair".ToUpper());
                 Console.Write(" -> ");
 
                 int menu = int.Parse(Console.ReadLine());
@@ -55,33 +60,36 @@ namespace T_GestaoContas_AED2020
                     case 1:
                         // LISTAR TODAS AS CONTAS DO BANCO
                         bank.ListAllAccounts();
-                        Console.WriteLine("..........................................................");
+                        Console.WriteLine("..........................................................\n");
                         break;
 
                     case 2:
                         // DETALHES DA UMA CONTA ESPECIFICA
-                        Console.Write("Introduza o NIB: ");
+                        Console.Write(">> Introduza o NIB: ".ToUpper());
                         long nibInput = long.Parse(Console.ReadLine());
                         bank.AccountDetails(nibInput);
-                        Console.WriteLine("..........................................................");
+                        Console.WriteLine("..........................................................\n");
                         break;
 
                     case 3:
                         // LISTAR TODAS AS CONTAS COM SALDO NEGATIVO
                         bank.NegativeBalanceAccounts();
-                        Console.WriteLine("..........................................................");
+                        Console.WriteLine("..........................................................\n");
                         break;
-
                     case 4:
                         // TRANSFERENCIA ENTRE CONTAS (NIB1, NIB2, QUANTIA) 
-                        Console.Write("Introduza NIB conta origem: ");
+                        Console.Write("\n>> Introduza NIB conta origem: ".ToUpper());
                         long nibInputOrigem = long.Parse(Console.ReadLine());
-                        Console.Write("Introduza NIB conta destino: ");
+                        Console.Write(">> Introduza NIB conta destino: ".ToUpper());
                         long nibInputDestino = long.Parse(Console.ReadLine());
-                        Console.Write("Introduza montante: ");
+                        Console.Write(">> Introduza montante: ".ToUpper());
                         long montante = long.Parse(Console.ReadLine());
                         bank.TransferBetweenAccounts(nibInputOrigem, nibInputDestino, montante);
-                        Console.WriteLine("..........................................................");
+                        // ADICIONAR A STACK
+
+                        lastTransactions.Enqueue((">> NIB Origem: " + nibInputOrigem + " | NIB Destino: " + nibInputDestino + " | Montante: " + montante).ToUpper());
+
+                        Console.WriteLine("..........................................................\n");
                         break;
 
                     case 5:
@@ -90,33 +98,44 @@ namespace T_GestaoContas_AED2020
                         long entity = companyNOS.GenerateEntity();
                         long reference = companyNOS.GenerateReference();
 
-                        Company companyVodafone = new Company("Vodafone");
+                        Company companyVodafone = new Company("Vodafone".ToUpper());
                         long entity1 = companyNOS.GenerateEntity();
                         long reference1 = companyNOS.GenerateReference();
 
                         Console.WriteLine();
-                        Console.WriteLine("Pagar a " + companyNOS.Name + ": ");
-                        Console.WriteLine("Entidade: " + entity);
-                        Console.WriteLine("Referência: " + reference);
+                        Console.WriteLine(" [ Pagar a ".ToUpper() + companyNOS.Name + " ]");
+                        Console.WriteLine(">> Entidade: ".ToUpper() + entity);
+                        Console.WriteLine(">> Referência: ".ToUpper() + reference);
                         Console.WriteLine();
 
-                        Console.WriteLine("Pagar a " + companyVodafone.Name + ": ");
-                        Console.WriteLine("Entidade: " + entity1);
-                        Console.WriteLine("Referência: " + reference1);
+                        Console.WriteLine(" [ Pagar a ".ToUpper() + companyVodafone.Name + " ]");
+                        Console.WriteLine(">> Entidade: ".ToUpper() + entity1);
+                        Console.WriteLine(">> Referência: .ToUpper()" + reference1);
                         Console.WriteLine();
 
-                        Console.Write("Introduza NIB: "); long nib2 = long.Parse(Console.ReadLine());
-                        Console.Write("Introduza a entidade: "); long ent = long.Parse(Console.ReadLine());
-                        Console.Write("Introduza a referencia: "); long refe = long.Parse(Console.ReadLine());
-                        Console.Write("Montante: "); double mont = double.Parse(Console.ReadLine());
+                        Console.Write(">> Introduza NIB: ".ToUpper()); long nib2 = long.Parse(Console.ReadLine());
+                        Console.Write(">> Introduza a entidade: ".ToUpper()); long ent = long.Parse(Console.ReadLine());
+                        Console.Write(">> Introduza a referencia: ".ToUpper()); long refe = long.Parse(Console.ReadLine());
+                        Console.Write(">> Montante: ".ToUpper()); double mont = double.Parse(Console.ReadLine());
                         // FAZER UM PAGAMENTO DE SERVIÇOS 
                         bank.ServicePayments(nib2, ent, refe, mont);
-                        Console.WriteLine("..........................................................");
+
+                        lastTransactions.Enqueue(">> Pagamento de serviços | Montante: ".ToUpper() + mont);
+
+                        Console.WriteLine("..........................................................\n");
                         break;
 
                     case 6:
+                        // IMPRIMIR QUEUE DAS ULTIMAS TRANSAÇÕES
+                        Console.WriteLine("\nUltimas transações: \n".ToUpper());
+                        foreach (var item in lastTransactions) { Console.WriteLine(item); }
+                        Console.WriteLine();
+                        break;
+
+                    case 7:
                         flag = false;
                         break;
+
                     default:
                         break;
                 }

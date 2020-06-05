@@ -9,14 +9,12 @@ namespace T_GestaoContas_AED2020
         // ATRIBUTOS
         private List<Owner> owners;
         private List<Account> accounts;
-        private Company company;
-        private string name;
 
         public Bank()
         {
             owners = new List<Owner>();
             accounts = new List<Account>();
-            company = new Company(name);
+            //company = new Company(name);
         }
 
         // ABRIR UMA NOVA CONTA NO BANCO
