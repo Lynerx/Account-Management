@@ -19,16 +19,19 @@ namespace T_GestaoContas_AED2020
         }
 
         // ABRIR UMA NOVA CONTA NO BANCO
-        public bool OpenNewAccount(long nib, double inicialBalance, Owner[] owners)
+        public bool OpenNewAccount(long nib, double inicialBalance, Owner[] owners, Type accountType)
         {
             var account = new Account();
             foreach (var owner in owners)
             {                                                               // CASO NAO EXISTA NENHUM TITULAR
-                if (!this.owners.Contains(owner)) this.owners.Add(owner);   // ADICIONA ESSE TITULAR
-                account.AddOwner(owner);
-                stackOwners.Push(owner);
+                if (!this.owners.Contains(owner)) this.owners.Add(owner);
+                {   
+                    account.AddOwner(owner);                                // ADICIONA ESSE TITULAR
+                    stackOwners.Push(owner);                                // ADICIONA STACK
+                }
             }                                                               // UPDATE DE DADOS
             account.Balance = inicialBalance;
+            account.Type = accountType;
             account.Nib = nib;
             accounts.Add(account);
 
@@ -46,6 +49,7 @@ namespace T_GestaoContas_AED2020
                             accounts[i].Balance -= amount;  // LEVANTA
                         else accounts[i].Balance = 0;
             }
+            Console.WriteLine(" (Levantamento com sucesso)".ToUpper());
         }
 
         // DEPOSITOS
@@ -57,6 +61,7 @@ namespace T_GestaoContas_AED2020
                     if (accounts[i].Owners.Length != 0)     // TEM TITULAR VALIDO
                         accounts[i].Balance += amount;      // DEPOSITA
             }
+            Console.WriteLine(" (Depostito com sucesso)".ToUpper());
         }
 
         // VERIFICA SE EXISTEM CONTAS COM SALDO NEGATIVO
@@ -85,7 +90,7 @@ namespace T_GestaoContas_AED2020
         }
 
         // RETORNA OS DETALHES DE UMA CONTA ESPECIFICA
-        public string AccountDetails(long nib)
+        public string SearchAccountDetails(long nib)
         {
             for (int i = 0; i < accounts.Count; i++)        // PERCORRE LISTA DE CONTAS
             {
@@ -124,6 +129,7 @@ namespace T_GestaoContas_AED2020
                     accounts[i].Balance -= amount;
                 }
             }
+            Console.WriteLine(" (Pagamento de serviço com sucesso)".ToUpper());
         }
 
         public String GetOwnersInfoInStack()
@@ -133,7 +139,6 @@ namespace T_GestaoContas_AED2020
                 Console.WriteLine(item.ListOwners().ToUpper() + "\n");
             }
             return string.Format("");
-
         }
 
     } // END CLASS

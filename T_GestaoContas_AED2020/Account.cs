@@ -25,7 +25,6 @@ namespace T_GestaoContas_AED2020
         {
             owners = new Owner[maxOwners];
             balance = 0;
-            type = Type.Order;
         }
         
         // ADICIONA UM TITULAR A CONTA 
