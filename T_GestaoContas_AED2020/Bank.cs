@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
-
+/**
+ *  Tiago Lino - 32727
+ *  Vasco Quelhas - 32362
+ */
 namespace T_GestaoContas_AED2020
 {
     class Bank 
