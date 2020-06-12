@@ -1,8 +1,5 @@
 ﻿using System;
-/**
- *  Tiago Lino - 32727
- *  Vasco Quelhas - 32362
- */
+
 namespace T_GestaoContas_AED2020
 {
     public enum Gender { Male, Female }
